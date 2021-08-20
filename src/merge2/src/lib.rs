@@ -14,8 +14,10 @@ pub fn merge(intervals: Vec<Range<usize>>) -> Vec<Range<usize>> {
     let mut borders: HashMap<usize, i32> = HashMap::with_capacity(intervals.len() * 2);
 
     for i in intervals.iter() {
-        *borders.entry(i.start).or_insert(0) += 1;
-        *borders.entry(i.end).or_insert(0) -= 1
+        if i.end > i.start {
+            *borders.entry(i.start).or_insert(0) += 1;
+            *borders.entry(i.end).or_insert(0) -= 1
+        }
     }
 
     let mut v: Vec<_> = borders.iter().collect();
@@ -45,6 +47,7 @@ mod tests {
         assert_eq!(merge(vec![1..3, 4..6]), [1..3, 4..6]);
         assert_eq!(merge(vec![1..3, 4..6, 5..20]), [1..3, 4..20]);
         assert_eq!(merge(vec![1..3]), [1..3]);
+        assert_eq!(merge(vec![1..3, 7..2]), [1..3]);
         assert_eq!(merge(vec![3..6, 1..3]), [1..6]);
         assert_eq!(merge(vec![3..6, 1..3, 6..7]), [1..7]);
         assert_eq!(merge(vec![1..6, 1..3]), [1..6]);

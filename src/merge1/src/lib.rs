@@ -17,6 +17,9 @@ pub fn merge(intervals: Vec<Range<usize>>) -> Vec<Range<usize>> {
     let mut start = tmp[0].start;
     let mut end = tmp[0].end;
     for (ptr, b) in tmp.iter().enumerate() {
+        if b.end <= b.start {
+            continue;
+        }
         if end < b.start {
             ret.push(start..end);
             start = tmp[ptr].start;
@@ -41,6 +44,7 @@ mod tests {
         assert_eq!(merge(vec![1..3, 4..6]), [1..3, 4..6]);
         assert_eq!(merge(vec![1..3, 4..6, 5..20]), [1..3, 4..20]);
         assert_eq!(merge(vec![1..3]), [1..3]);
+        assert_eq!(merge(vec![1..3, 7..2]), [1..3]);
         assert_eq!(merge(vec![3..6, 1..3]), [1..6]);
         assert_eq!(merge(vec![3..6, 1..3, 6..7]), [1..7]);
         assert_eq!(merge(vec![1..6, 1..3]), [1..6]);
