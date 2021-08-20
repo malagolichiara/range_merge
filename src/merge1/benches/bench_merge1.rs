@@ -1,12 +1,11 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
 use merge1::merge;
+use std::ops::Range;
 
 fn criterion_benchmark(c: &mut Criterion) {
-    c.bench_function("merge", |b| {
-        b.iter(|| {
-            let input = vec![1..2, 4..5, 1..52, 22..33, 1..3, 67..90];
-            merge(black_box(input))
-        })
+    let input: Vec<Range<usize>> = vec![1..2, 4..5, 1..52, 22..33, 1..3, 67..90];
+    c.bench_with_input(BenchmarkId::new("merge1", ""), &input, |b, i| {
+        b.iter(|| merge(black_box(i.to_vec())))
     });
 }
 
