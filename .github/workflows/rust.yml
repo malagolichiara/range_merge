@@ -23,4 +23,14 @@ jobs:
     - name: Run tests
       run: cargo test
     - name: Run bench
-      run: cargo bench
+      run: |
+        cargo bench
+        sed -i 's/merge1 | .*$/merge1 | '"$(jq ".mean.point_estimate" < target/criterion/merge1/base/estimates.json)"' ns/' README.md
+        sed -i 's/merge2 | .*$/merge2 | '"$(jq ".mean.point_estimate" < target/criterion/merge2/base/estimates.json)"' ns/' README.md
+        sed -i 's/merge3 | .*$/merge3 | '"$(jq ".mean.point_estimate" < target/criterion/merge3/base/estimates.json)"' ns/' README.md
+    - name: Commit README.md
+      uses: EndBug/add-and-commit@v7
+      with:
+        default_author: github_actions
+        message: 'Update README.md for benchmarks'
+        add: 'README.md'        
