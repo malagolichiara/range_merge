@@ -1,0 +1,16 @@
+[package]
+name = "merge3"
+version = "0.1.0"
+authors = ["Chiara Malagoli <malagoli@gbinside.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "bench_merge3"
+harness = false

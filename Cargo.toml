@@ -1,0 +1,9 @@
+[workspace]
+members = [
+  "src/merge1",
+  "src/merge2",
+  "src/merge3",
+]
+
+[profile.bench]
+debug = true
