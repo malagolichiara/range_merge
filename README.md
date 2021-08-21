@@ -2,8 +2,8 @@
 
 ## benchmarks
 
-Implementation| times
+Implementation| time
 --- | ---
-merge1 |                     [70.296 ns **71.589 ns** 72.891 ns]
-merge2 |                    [543.16 ns **551.53 ns** 560.94 ns]
-merge3 |                    [235.45 ns **238.28 ns** 241.45 ns]
+merge1 | 95.43416622007402 ns
+merge2 | 655.2655139256935 ns
+merge3 | 308.6571746661441 ns
